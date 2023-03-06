@@ -1,10 +1,13 @@
 package otp.entity;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "persons")
-public class Persons {
+@Component
+@Table(name = "person")
+public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -12,11 +15,16 @@ public class Persons {
     private String name;
     private String idNumber;
 
-    public Persons() {
+    public Person() {
     }
 
-    public Persons(int id, String name, String idNumber) {
+    public Person(int id, String name, String idNumber) {
         this.id = id;
+        this.name = name;
+        this.idNumber = idNumber;
+    }
+
+    public Person(String name, String idNumber) {
         this.name = name;
         this.idNumber = idNumber;
     }
@@ -47,7 +55,7 @@ public class Persons {
 
     @Override
     public String toString() {
-        return "Persons{" +
+        return "Person{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", idNumber='" + idNumber + '\'' +
