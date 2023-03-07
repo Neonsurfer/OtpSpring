@@ -28,15 +28,15 @@ public class AddressApiController implements AddressApi {
     @Override
     @PostMapping(value = "/create", produces = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
-    public Address createAddress(String city, String state, String country, String addressLine) {
-        return addressService.createAddress(city, state, country, addressLine);
+    public Address createAddress(String city, String state, String country, String addressLine, Boolean isPermanent) {
+        return addressService.createAddress(city, state, country, addressLine, isPermanent);
     }
 
     @Override
     @PutMapping(value = "/modify", produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
-    public Address modifyAddress(int id, String city, String state, String country, String addressLine) throws NotFoundException {
-        return addressService.modifyAddress(id, city, state, country, addressLine);
+    public Address modifyAddress(int id, String city, String state, String country, String addressLine, Boolean isPermanent) throws NotFoundException {
+        return addressService.modifyAddress(id, city, state, country, addressLine, isPermanent);
     }
 
     @Override

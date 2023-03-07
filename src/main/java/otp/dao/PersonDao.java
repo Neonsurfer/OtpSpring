@@ -7,8 +7,10 @@ import java.util.List;
 
 public interface PersonDao {
     StringBuilder SELECT_PERSON = new StringBuilder()
-            .append("SELECT person.id, person.name, person.id_number \n")
-            .append("FROM Person person \n");
+            .append("SELECT new ").append(Person.class.getCanonicalName()).append("( \n")
+            .append("person.id, person.name, person.id_number) \n")
+            .append("FROM Person person \n")
+            .append("WHERE 1=1 \n");
 
 
     List<Person> listPersons();

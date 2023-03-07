@@ -6,8 +6,8 @@ import javax.persistence.*;
 
 @Entity
 @Component
-@Table(name = "contacts")
-public class Contacts {
+@Table(name = "contact")
+public class Contact {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,11 +18,19 @@ public class Contacts {
     String mobileNum;
     int addressId;
 
-    public Contacts() {
+    public Contact() {
     }
 
-    public Contacts(int id, String email, String phoneNum, String faxNum, String mobileNum, int addressId) {
+    public Contact(int id, String email, String phoneNum, String faxNum, String mobileNum, int addressId) {
         this.id = id;
+        this.email = email;
+        this.phoneNum = phoneNum;
+        this.faxNum = faxNum;
+        this.mobileNum = mobileNum;
+        this.addressId = addressId;
+    }
+
+    public Contact(String email, String phoneNum, String faxNum, String mobileNum, int addressId) {
         this.email = email;
         this.phoneNum = phoneNum;
         this.faxNum = faxNum;
@@ -80,7 +88,7 @@ public class Contacts {
 
     @Override
     public String toString() {
-        return "Contacts{" +
+        return "Contact{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", phoneNum='" + phoneNum + '\'' +

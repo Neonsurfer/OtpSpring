@@ -7,15 +7,15 @@ import javax.persistence.Table;
 
 @Entity
 @Component
-@Table(name = "personaddresses")
-public class PersonAddresses {
+@Table(name = "personaddress")
+public class PersonAddress {
     int personId;
     int addressesId;
 
-    public PersonAddresses() {
+    public PersonAddress() {
     }
 
-    public PersonAddresses(int personId, int addressesId) {
+    public PersonAddress(int personId, int addressesId) {
         this.personId = personId;
         this.addressesId = addressesId;
     }

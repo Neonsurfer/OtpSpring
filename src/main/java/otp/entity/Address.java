@@ -15,23 +15,26 @@ public class Address {
     String state;
     String country;
     String addressLine;
+    Boolean isPermanent;
 
     public Address() {
     }
 
-    public Address(int id, String city, String state, String country, String address) {
+    public Address(int id, String city, String state, String country, String address, Boolean isPermanent) {
         this.id = id;
         this.city = city;
         this.state = state;
         this.country = country;
         this.addressLine = address;
+        this.isPermanent = isPermanent;
     }
 
-    public Address(String city, String state, String country, String address) {
+    public Address(String city, String state, String country, String address, Boolean isPermanent) {
         this.city = city;
         this.state = state;
         this.country = country;
         this.addressLine = address;
+        this.isPermanent = isPermanent;
     }
 
     public int getId() {
@@ -72,6 +75,14 @@ public class Address {
 
     public void setAddressLine(String addressLine) {
         this.addressLine = addressLine;
+    }
+
+    public Boolean getPermanent() {
+        return isPermanent;
+    }
+
+    public void setPermanent(Boolean permanent) {
+        isPermanent = permanent;
     }
 
     @Override

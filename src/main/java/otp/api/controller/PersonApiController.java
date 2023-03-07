@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import otp.api.PersonApi;
 import otp.entity.Person;
+import otp.entity.PersonAddress;
 import otp.exceptions.FoundException;
 import otp.exceptions.NotFoundException;
 import otp.exceptions.UnprocessableEntityException;
@@ -46,6 +47,19 @@ public class PersonApiController implements PersonApi {
     public void deletePerson(int id) throws NotFoundException {
         personService.deletePerson(id);
     }
+
+    @Override
+    @PostMapping(value = "/create", produces = {"application/json"})
+    @ResponseStatus(HttpStatus.CREATED)
+    public PersonAddress createPersonAddressConnection(int personId, int addressId) throws UnprocessableEntityException, NotFoundException {
+        return personService.createPersonAddressConnection(personId, addressId);
+    }
+
+    @Override
+    public void deletePersonAddressConnection(int personId, int addressId) {
+        personService.deletePersonAddressConnection(personId, addressId);
+    }
+
 
     //TODO Delete, only for testing
     @GetMapping(value = "/")

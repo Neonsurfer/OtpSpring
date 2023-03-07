@@ -25,9 +25,7 @@ public class PersonDaoImpl implements PersonDao {
 
     @Override
     public Person savePerson(String name, String idNumber) {
-        Person person = new Person();
-        person.setName(name);
-        person.setIdNumber(idNumber);
+        Person person = new Person(name, idNumber);
         entityManager.persist(person);
         entityManager.getTransaction().commit();
         entityManager.flush();
@@ -62,7 +60,7 @@ public class PersonDaoImpl implements PersonDao {
     @Override
     public boolean existsByIdNumber(String idNumber) {
         Query query = entityManager.createQuery(
-                SELECT_PERSON.append("WHERE person.id_number = ").append(idNumber)
+                SELECT_PERSON.append("AND person.id_number = ").append(idNumber)
                         .toString());
         return query.getResultList().size() > 0;
     }

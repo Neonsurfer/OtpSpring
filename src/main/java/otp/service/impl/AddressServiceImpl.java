@@ -21,16 +21,16 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Address createAddress(String city, String state, String country, String addressLine) {
-        return addressDao.saveAddress(city, state, country, addressLine);
+    public Address createAddress(String city, String state, String country, String addressLine, Boolean isPermanent) {
+        return addressDao.saveAddress(city, state, country, addressLine, isPermanent);
     }
 
     @Override
-    public Address modifyAddress(int id, String city, String state, String country, String addressLine) throws NotFoundException {
+    public Address modifyAddress(int id, String city, String state, String country, String addressLine, Boolean isPermanent) throws NotFoundException {
         if (!addressDao.existsById(id)) {
             throw new NotFoundException("Ezzel az azonosítóval nem található cím! \n");
         }
-        return addressDao.modifyAddress(id, city, state, country, addressLine);
+        return addressDao.modifyAddress(id, city, state, country, addressLine, isPermanent);
     }
 
     @Override
