@@ -2,7 +2,6 @@ package otp.service;
 
 import otp.entity.Person;
 import otp.entity.PersonAddress;
-import otp.exceptions.FoundException;
 import otp.exceptions.NotFoundException;
 import otp.exceptions.UnprocessableEntityException;
 
@@ -14,7 +13,7 @@ public interface PersonService {
 
     Person createPerson(String name, String idNumber) throws UnprocessableEntityException;
 
-    Person modifyPerson(int id, String name, String idNumber) throws NotFoundException, FoundException;
+    Person modifyPerson(int id, String name, String idNumber) throws NotFoundException, UnprocessableEntityException;
 
     void deletePerson(int id) throws NotFoundException;
 

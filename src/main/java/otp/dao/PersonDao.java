@@ -11,8 +11,7 @@ public interface PersonDao {
             .append("person.id, person.name, person.id_number) \n")
             .append("FROM Person person \n")
             .append("WHERE 1=1 \n");
-
-
+    
     List<Person> listPersons();
 
     Person savePerson(String name, String idNumber);

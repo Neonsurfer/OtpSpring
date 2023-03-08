@@ -7,7 +7,6 @@ import otp.dao.PersonAddressDao;
 import otp.dao.PersonDao;
 import otp.entity.Person;
 import otp.entity.PersonAddress;
-import otp.exceptions.FoundException;
 import otp.exceptions.NotFoundException;
 import otp.exceptions.UnprocessableEntityException;
 import otp.service.PersonService;
@@ -40,12 +39,12 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person modifyPerson(int id, String name, String idNumber) throws NotFoundException, FoundException {
+    public Person modifyPerson(int id, String name, String idNumber) throws NotFoundException, UnprocessableEntityException {
         if (!personDao.existsById(id)) {
             throw new NotFoundException("Ezzel az azonosítóval nem található személy! \n");
         }
         if (personDao.existsByIdNumber(idNumber)) {
-            throw new FoundException("Ezzel a személyazonosítóval már létezik személy! \n");
+            throw new UnprocessableEntityException("Ezzel a személyazonosítóval már létezik személy! \n");
         }
         return personDao.modifyPerson(id, name, idNumber);
     }
@@ -81,6 +80,5 @@ public class PersonServiceImpl implements PersonService {
             personAddressDao.deleteConnection(personId, addressId);
         }
     }
-
 
 }

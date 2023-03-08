@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import otp.api.PersonApi;
 import otp.entity.Person;
 import otp.entity.PersonAddress;
-import otp.exceptions.FoundException;
 import otp.exceptions.NotFoundException;
 import otp.exceptions.UnprocessableEntityException;
 import otp.service.PersonService;
@@ -30,41 +29,45 @@ public class PersonApiController implements PersonApi {
     @Override
     @PostMapping(value = "/create", produces = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
-    public Person createPerson(String name, String idNumber) throws UnprocessableEntityException {
+    public Person createPerson(
+            @RequestParam(value = "name") String name,
+            @RequestParam(value = "idNumber") String idNumber) throws UnprocessableEntityException {
         return personService.createPerson(name, idNumber);
     }
 
     @Override
     @PutMapping(value = "/modify", produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
-    public Person modifyPerson(int id, String name, String idNumber) throws NotFoundException, FoundException {
+    public Person modifyPerson(
+            @RequestParam(value = "id") int id,
+            @RequestParam(value = "name") String name,
+            @RequestParam(value = "idNumber") String idNumber) throws NotFoundException, UnprocessableEntityException {
         return personService.modifyPerson(id, name, idNumber);
     }
 
     @Override
     @DeleteMapping(value = "/delete")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletePerson(int id) throws NotFoundException {
+    public void deletePerson(
+            @RequestParam(value = "id") int id) throws NotFoundException {
         personService.deletePerson(id);
     }
 
     @Override
-    @PostMapping(value = "/create", produces = {"application/json"})
+    @PostMapping(value = "/createconn", produces = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
-    public PersonAddress createPersonAddressConnection(int personId, int addressId) throws UnprocessableEntityException, NotFoundException {
+    public PersonAddress createPersonAddressConnection(
+            @RequestParam(value = "personId") int personId,
+            @RequestParam(value = "addressId") int addressId) throws UnprocessableEntityException, NotFoundException {
         return personService.createPersonAddressConnection(personId, addressId);
     }
 
     @Override
-    public void deletePersonAddressConnection(int personId, int addressId) {
+    @DeleteMapping(value = "/deleteconn")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletePersonAddressConnection(
+            @RequestParam(value = "personId") int personId,
+            @RequestParam(value = "addressId") int addressId) throws NotFoundException {
         personService.deletePersonAddressConnection(personId, addressId);
-    }
-
-
-    //TODO Delete, only for testing
-    @GetMapping(value = "/")
-    @ResponseBody
-    public String hello() {
-        return "Hello!";
     }
 }

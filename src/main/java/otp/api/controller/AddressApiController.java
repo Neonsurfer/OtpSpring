@@ -28,21 +28,33 @@ public class AddressApiController implements AddressApi {
     @Override
     @PostMapping(value = "/create", produces = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
-    public Address createAddress(String city, String state, String country, String addressLine, Boolean isPermanent) {
+    public Address createAddress(
+            @RequestParam(value = "city") String city,
+            @RequestParam(value = "state") String state,
+            @RequestParam(value = "country") String country,
+            @RequestParam(value = "addressLine") String addressLine,
+            @RequestParam(value = "isPermanent") Boolean isPermanent) {
         return addressService.createAddress(city, state, country, addressLine, isPermanent);
     }
 
     @Override
     @PutMapping(value = "/modify", produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
-    public Address modifyAddress(int id, String city, String state, String country, String addressLine, Boolean isPermanent) throws NotFoundException {
+    public Address modifyAddress(
+            @RequestParam(value = "id") int id,
+            @RequestParam(value = "city") String city,
+            @RequestParam(value = "state") String state,
+            @RequestParam(value = "country") String country,
+            @RequestParam(value = "addressLine") String addressLine,
+            @RequestParam(value = "isPermanent") Boolean isPermanent) throws NotFoundException {
         return addressService.modifyAddress(id, city, state, country, addressLine, isPermanent);
     }
 
     @Override
     @DeleteMapping(value = "/delete")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteAddress(int id) throws NotFoundException {
+    public void deleteAddress(
+            @RequestParam(value = "id") int id) throws NotFoundException {
         addressService.deleteAddress(id);
     }
 }

@@ -5,9 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import otp.api.ContactApi;
 import otp.entity.Contact;
-import otp.exceptions.FoundException;
 import otp.exceptions.NotFoundException;
-import otp.exceptions.UnprocessableEntityException;
 import otp.service.ContactService;
 
 import java.util.List;
@@ -29,14 +27,25 @@ public class ContactApiController implements ContactApi {
     @Override
     @PostMapping(value = "/create", produces = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
-    public Contact createContact(String email, String phoneNum, String faxNum, String mobileNum, int addressId) throws UnprocessableEntityException, NotFoundException {
+    public Contact createContact(
+            @RequestParam(value = "email") String email,
+            @RequestParam(value = "phoneNum") String phoneNum,
+            @RequestParam(value = "faxNum") String faxNum,
+            @RequestParam(value = "mobileNum") String mobileNum,
+            @RequestParam(value = "addressId") int addressId) {
         return contactService.createContact(email, phoneNum, faxNum, mobileNum, addressId);
     }
 
     @Override
     @PutMapping(value = "/modify", produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
-    public Contact modifyContact(int id, String email, String phoneNum, String faxNum, String mobileNum, int addressId) throws NotFoundException, FoundException {
+    public Contact modifyContact(
+            @RequestParam(value = "id") int id,
+            @RequestParam(value = "email") String email,
+            @RequestParam(value = "phoneNum") String phoneNum,
+            @RequestParam(value = "faxNum") String faxNum,
+            @RequestParam(value = "mobileNum") String mobileNum,
+            @RequestParam(value = "addressId") int addressId) throws NotFoundException {
         return contactService.modifyContact(id, email, phoneNum, faxNum, mobileNum);
     }
 

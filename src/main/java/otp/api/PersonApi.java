@@ -14,11 +14,11 @@ public interface PersonApi {
 
     Person createPerson(String name, String idNumber) throws UnprocessableEntityException, NotFoundException;
 
-    Person modifyPerson(int id, String name, String idNumber) throws NotFoundException, FoundException;
+    Person modifyPerson(int id, String name, String idNumber) throws NotFoundException, FoundException, UnprocessableEntityException;
 
     void deletePerson(int id) throws NotFoundException;
 
     PersonAddress createPersonAddressConnection(int personId, int AddressId) throws UnprocessableEntityException, NotFoundException;
 
-    void deletePersonAddressConnection(int personId, int AddressId);
+    void deletePersonAddressConnection(int personId, int AddressId) throws NotFoundException;
 }
